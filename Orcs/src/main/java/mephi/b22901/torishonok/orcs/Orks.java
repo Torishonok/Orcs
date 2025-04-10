@@ -4,13 +4,17 @@
 
 package mephi.b22901.torishonok.orcs;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author vikus
  */
-public class Orcs {
+public class Orks {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
-}
+       SwingUtilities.invokeLater(() -> {
+            GUI gui = new GUI();
+            gui.initializeTree(); 
+        });
+}}
