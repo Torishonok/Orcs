@@ -12,11 +12,11 @@ public class MistyMountainsOrkFactory implements OrkBuilderFactory {
     @Override
     public OrkBuilder createOrkBuilder() {
         OrkBuilder builder = new OrkBuilder();
-        builder.setAttributes("Мглистые Горы");
+        builder.setAttributes("Misty Mountains");
         return builder;
     }
      @Override
     public String getTribe() {
-        return "Misty Mountines";
+        return "Misty Mountains";
     }
 }

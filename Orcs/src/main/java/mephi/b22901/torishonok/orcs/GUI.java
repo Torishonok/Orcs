@@ -95,7 +95,7 @@ public class GUI {
                 factory = new MistyMountainsOrkFactory();
                 break;
             default:
-                return;
+                throw new IllegalArgumentException("Неизвестное племя: " + tribe);
         }
 
         OrkDirector director = new OrkDirector(factory);
