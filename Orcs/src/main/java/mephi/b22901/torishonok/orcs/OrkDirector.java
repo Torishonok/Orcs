@@ -31,8 +31,8 @@ public class OrkDirector {
         OrkBuilder builder = factory.createOrkBuilder();
         return builder
                 .setName(faker.name().fullName())
-                .setAttributes(factory.getTribe()) // Получаем племя из фабрики
-                .setWeapon("Banner") // Командир получает знамя
+                .setAttributes(factory.getTribe()) 
+                .setWeapon("Banner") 
                 .build();
     }
 
@@ -40,8 +40,8 @@ public class OrkDirector {
         OrkBuilder builder = factory.createOrkBuilder();
         return builder
                 .setName(faker.name().fullName())
-                .setAttributes(factory.getTribe()) // Получаем племя из фабрики
-                .setWeapon("Bow") // Разведчик получает лук вместо меча
+                .setAttributes(factory.getTribe()) 
+                .setWeapon("Bow") 
                 .build();
     }
 }

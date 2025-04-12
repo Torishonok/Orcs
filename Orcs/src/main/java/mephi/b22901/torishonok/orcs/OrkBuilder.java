@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author vikus
  */
-class OrkBuilder {
+public class OrkBuilder {
     private String name;
     private String weapon;
     private String armor;
@@ -28,6 +28,8 @@ class OrkBuilder {
         this.name = name;
         return this;
     }
+    
+    
     
     public OrkBuilder setWeapon(String weapon) {
         this.weapon = weapon;

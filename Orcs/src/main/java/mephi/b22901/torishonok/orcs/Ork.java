@@ -31,6 +31,11 @@ class Ork {
     public String getName() {
         return name;
     }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
 
     public String getWeapon() {
         return weapon;
@@ -61,12 +66,12 @@ class Ork {
     }
 
     public String getAttributes() {
-        return "Племя: " + banner; // Здесь можно изменить на более подходящее значение
+        return "Племя: " + banner; 
     }
 
     @Override
     public String toString() {
-        return name; // Отображение имени орка в JTree
+        return name; 
     }
 
     

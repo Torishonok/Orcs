@@ -11,8 +11,6 @@ import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.*;
 
@@ -27,6 +25,14 @@ public class GUI {
     private JComboBox<String> tribeComboBox;
     private JComboBox<String> roleComboBox;
     private DefaultMutableTreeNode rootNode;
+    private String name;
+    private String weapon;
+    private String armor;
+    private String banner;
+    private int strength;
+    private int agility;
+    private int intelligence;
+    private int health;
 
     public GUI() {
         frame = new JFrame("Армия Мордора");
@@ -34,7 +40,7 @@ public class GUI {
         frame.setSize(600, 400);
         frame.setLayout(new BorderLayout());
 
-        // Создание корневого узла
+        
         rootNode = new DefaultMutableTreeNode("Армия Мордора");
         tree = new JTree(rootNode);
         tree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -48,7 +54,7 @@ public class GUI {
             }
         });
 
-        // Панель для выбора племени и роли
+       
         JPanel controlPanel = new JPanel();
         tribeComboBox = new JComboBox<>(new String[]{"Мордор", "Дол Гулдур", "Мглистые Горы"});
         roleComboBox = new JComboBox<>(new String[]{"Базовый", "Командир", "Разведчик"});
@@ -67,11 +73,11 @@ public class GUI {
         controlPanel.add(roleComboBox);
         controlPanel.add(createButton);
 
-        // Панель для отображения информации об орке
+        
         infoArea = new JTextArea();
         infoArea.setEditable(false);
 
-        // Добавление компонентов в окно
+        
         frame.add(new JScrollPane(tree), BorderLayout.WEST);
         frame.add(controlPanel, BorderLayout.NORTH);
         frame.add(new JScrollPane(infoArea), BorderLayout.CENTER);
@@ -80,6 +86,12 @@ public class GUI {
     }
 
     private void createOrk() {
+        //Ork newOrc = new Ork( name,  weapon,  armor,  banner,  strength,  agility,  intelligence,  health);
+         //OrkBuilder orkBuilder = new OrkBuilder(); 
+         //OrkBuilder.OrkNameGenerator nameGenerator = orkBuilder.new OrkNameGenerator();
+         // newOrk.setName(nameGenerator.generateOrkName());
+         //OrkNameGenerator nameGenerator = new OrkNameGenerator();
+       //newOrc.setName(nameGenerator.generateOrkName());
         String tribe = (String) tribeComboBox.getSelectedItem();
         String role = (String) roleComboBox.getSelectedItem();
 
@@ -115,7 +127,8 @@ public class GUI {
                 return;
         }
 
-        // Добавление нового орка в дерево
+       
+        
         DefaultMutableTreeNode tribeNode = findTribeNode(tribe);
         if (tribeNode != null) {
             tribeNode.add(new DefaultMutableTreeNode(newOrk));
@@ -148,7 +161,7 @@ public class GUI {
     }
 
     public void initializeTree() {
-        // Инициализация племен
+        
         DefaultMutableTreeNode mordorNode = new DefaultMutableTreeNode("Мордор");
         DefaultMutableTreeNode dolGuldurNode = new DefaultMutableTreeNode("Дол Гулдур");
         DefaultMutableTreeNode mistyMountainsNode = new DefaultMutableTreeNode("Мглистые Горы");
@@ -157,7 +170,7 @@ public class GUI {
         rootNode.add(dolGuldurNode);
         rootNode.add(mistyMountainsNode);
 
-        // Обновление модели дерева
+        
         ((DefaultTreeModel) tree.getModel()).reload();
     }
 
