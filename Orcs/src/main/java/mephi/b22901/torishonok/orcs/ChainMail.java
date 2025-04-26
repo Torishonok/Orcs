@@ -8,9 +8,12 @@ package mephi.b22901.torishonok.orcs;
  *
  * @author vikus
  */
-public class MistyMountainsWeapon implements Weapon{
+public class ChainMail implements Armor{
+    private final String name = "Chain mail";
+    
     @Override
-    public String getName() {
-        return "Топор";
+    public String getName(){
+        return name;
     }
+    
 }

@@ -9,9 +9,11 @@ package mephi.b22901.torishonok.orcs;
  * @author vikus
  */
 public class MistyMountainsBanner implements Banner {
+    private final String name = "Banner with the Moon";
+    
     @Override
-    public String getSymbol() {
-        return "Знамя Мглистых Гор";
+    public String getName() {
+        return name;
     }
     
 }

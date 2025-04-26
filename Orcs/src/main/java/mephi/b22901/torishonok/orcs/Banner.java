@@ -9,5 +9,5 @@ package mephi.b22901.torishonok.orcs;
  * @author vikus
  */
 public interface Banner {
-    String getSymbol();
+   public String getName();
 }

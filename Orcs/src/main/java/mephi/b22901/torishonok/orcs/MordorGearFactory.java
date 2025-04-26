@@ -10,17 +10,17 @@ package mephi.b22901.torishonok.orcs;
  */
   public class MordorGearFactory implements OrcGearFactory {
     @Override
-    public String createWeapon() {
-        return "Heavy Sword";
+    public Weapon createWeapon() {
+        return new HeavySword();
     }
 
     @Override
-    public String createArmor() {
-        return "Steel armor";
+    public Armor createArmor() {
+        return new SteelArmor();
     }
 
     @Override
-    public String createBanner() {
-        return "Banner with the Red Eye";
+    public Banner createBanner() {
+        return new MordorBanner();
     }
 }  

@@ -8,10 +8,12 @@ package mephi.b22901.torishonok.orcs;
  *
  * @author vikus
  */
-public class DolGuldurArmor implements Armor {
+public class Bow implements Weapon{
+    private final String name = "Bow";
+    
     @Override
-    public String getType() {
-        return "Броня Дол Гулдур";
+    public String getName(){
+        return name;
     }
     
 }

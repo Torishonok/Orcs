@@ -9,9 +9,11 @@ package mephi.b22901.torishonok.orcs;
  * @author vikus
  */
 public class MordorBanner implements Banner {
+    private final String name = "Banner with the Eye of Sauron";
+    
     @Override
-    public String getSymbol() {
-        return "Знамя Мордор";
+    public String getName() {
+        return name;
     }
     
 }

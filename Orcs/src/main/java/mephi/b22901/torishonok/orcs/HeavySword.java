@@ -8,7 +8,12 @@ package mephi.b22901.torishonok.orcs;
  *
  * @author vikus
  */
-interface OrkBuilderFactory {
-   OrkBuilder createOrkBuilder(); 
-    String getTribe();
+public class HeavySword implements Weapon{
+    private final String name = "Heavy sword";
+    
+    @Override
+    public String getName(){
+        return name;
+    }
+    
 }

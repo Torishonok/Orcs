@@ -11,70 +11,33 @@ import java.util.Random;
  *
  * @author vikus
  */
-public class OrkBuilder {
-    private String name;
-    private String weapon;
-    private String armor;
-    private String banner;
-    private int strength;
-    private int agility;
-    private int intelligence;
-    private int health;
-
-    private static final Random random = new Random();
-    private static final Faker faker = new Faker();
-
-    public OrkBuilder setName(String name) {
-        this.name = name;
-        return this;
+abstract class OrkBuilder <T extends OrcGearFactory> {
+    protected Ork ork;
+    protected T gearFactory;
+    protected final double ultra = 0.3;
+    
+    public OrkBuilder(T gearFactory) {
+        this.gearFactory = gearFactory;
     }
     
+    public void createNewOrk() {  
+        ork = new Ork(); }
+    public Ork getOrk() {  
+        return ork; }
     
+    public void setName(){
+        ork.setName(new OrkNames().generateName());
+    }
+    public abstract void setAttributes();
     
-    public OrkBuilder setWeapon(String weapon) {
-        this.weapon = weapon;
-        return this;
-    }
-
-
-    public OrkBuilder setAttributes(String tribe) {
-        OrcGearFactory gearFactory;
-        
-        switch (tribe) {
-            case "Mordor":
-                gearFactory = new MordorGearFactory();
-                this.strength = (int) (random.nextInt(100) * 1.3);
-                this.agility = (int) (random.nextInt(100) * 0.7);
-                this.intelligence = random.nextInt(50) + 1;
-                this.health = random.nextInt(151) + 50; 
-                break;
-            case "Dol Guldur":
-                gearFactory = new DolGuldurGearFactory();
-                this.strength = random.nextInt(100) + 1;
-                this.agility = random.nextInt(100) + 1;
-                this.intelligence = random.nextInt(50) + 1;
-                this.health = random.nextInt(151) + 50; 
-                break;
-            case "Misty Mountains":
-                gearFactory = new MistyMountainsGearFactory();
-                this.strength = (int) (random.nextInt(100) * 0.7);
-                this.agility = (int) (random.nextInt(100) * 1.3);
-                this.intelligence = (int) (random.nextInt(50) * 0.7);
-                this.health = random.nextInt(151) + 50; 
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown tribe");
-        }
-        this.weapon = gearFactory.createWeapon();
-        this.armor = gearFactory.createArmor();
-        this.banner = gearFactory.createBanner();
-        return this;
-    }
-
-    public Ork build() {
-        if (name == null) {
-            name = faker.name().fullName(); 
-        }
-        return new Ork(name, weapon, armor, banner, strength, agility, intelligence, health);
-    }
+    public void setGear(){
+        ork.setWeapon(gearFactory.createWeapon().getName());
+        ork.setArmor(gearFactory.createArmor().getName());
+    };
+    public void setBanner(){
+        ork.setBanner(gearFactory.createBanner().getName());
+    };
+    public void setBow(){
+        ork.setWeapon(gearFactory.createBow().getName());
+    };
 }

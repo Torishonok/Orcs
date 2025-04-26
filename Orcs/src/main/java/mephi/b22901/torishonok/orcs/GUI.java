@@ -40,7 +40,6 @@ public class GUI {
         frame.setSize(600, 400);
         frame.setLayout(new BorderLayout());
 
-        
         rootNode = new DefaultMutableTreeNode("Армия Мордора");
         tree = new JTree(rootNode);
         tree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -54,11 +53,10 @@ public class GUI {
             }
         });
 
-       
         JPanel controlPanel = new JPanel();
-        tribeComboBox = new JComboBox<>(new String[]{"Мордор", "Дол Гулдур", "Мглистые Горы"});
-        roleComboBox = new JComboBox<>(new String[]{"Базовый", "Командир", "Разведчик"});
-        JButton createButton = new JButton("Создать Орка");
+        tribeComboBox = new JComboBox<>(new String[]{"Mordor", "Dol Guldur", "Misty Mountains"});
+        roleComboBox = new JComboBox<>(new String[]{"Basic", "Leader", "Scout"});
+        JButton createButton = new JButton("Creature Orc");
 
         createButton.addActionListener(new ActionListener() {
             @Override
@@ -73,62 +71,53 @@ public class GUI {
         controlPanel.add(roleComboBox);
         controlPanel.add(createButton);
 
-        
         infoArea = new JTextArea();
         infoArea.setEditable(false);
 
-        
         frame.add(new JScrollPane(tree), BorderLayout.WEST);
         frame.add(controlPanel, BorderLayout.NORTH);
         frame.add(new JScrollPane(infoArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
+        initializeTree();
     }
 
     private void createOrk() {
-        //Ork newOrc = new Ork( name,  weapon,  armor,  banner,  strength,  agility,  intelligence,  health);
-         //OrkBuilder orkBuilder = new OrkBuilder(); 
-         //OrkBuilder.OrkNameGenerator nameGenerator = orkBuilder.new OrkNameGenerator();
-         // newOrk.setName(nameGenerator.generateOrkName());
-         //OrkNameGenerator nameGenerator = new OrkNameGenerator();
-       //newOrc.setName(nameGenerator.generateOrkName());
         String tribe = (String) tribeComboBox.getSelectedItem();
         String role = (String) roleComboBox.getSelectedItem();
 
-        OrkBuilderFactory factory;
-        switch (tribe) {
-            case "Мордор":
-                factory = new MordorOrkFactory();
-                break;
-            case "Дол Гулдур":
-                factory = new DolGuldurOrkFactory();
-                break;
-            case "Мглистые Горы":
-                factory = new MistyMountainsOrkFactory();
-                break;
-            default:
-                throw new IllegalArgumentException("Неизвестное племя: " + tribe);
+        OrkBuilder factory = OrcBuilderFactory.createBuilder(tribe);
+        if (factory == null) {
+        System.out.println("Не удалось создать строителя орков для племени: " + tribe);
+        return;
+    }
+        /*if (tribe.equals("Мордор")) {
+            factory = new MordorOrkBuilder<>(new MordorGearFactory());
+        } else if (tribe.equals("Дол Гулдур")) {
+            factory = new DolGuldurOrkBuilder<>(new DolGuldurGearFactory());
+        } else if (tribe.equals("Мглистые Горы")) {
+            factory = new MistyMountainsOrkBuilder<>(new MistyMountainsGearFactory());
+        } else {
+            throw new IllegalArgumentException("Неизвестное племя: " + tribe);
+        }*/
+
+        OrkDirector director = new OrkDirector();
+        director.setOrkBuilder(factory);
+        Ork newOrk = null;
+
+        if (role.equals("Basic")) {
+            director.createBasicOrk();
+            newOrk = director.getOrk();
+        } else if (role.equals("Leader")) {
+            director.createLeaderOrk();
+            newOrk = director.getOrk();
+        } else if (role.equals("Scout")) {
+            director.createScoutOrk();
+            newOrk = director.getOrk();
+        } else {
+            return;
         }
 
-        OrkDirector director = new OrkDirector(factory);
-        Ork newOrk;
-
-        switch (role) {
-            case "Базовый":
-                newOrk = director.createBasicOrk();
-                break;
-            case "Командир":
-                newOrk = director.createLeaderOrk();
-                break;
-            case "Разведчик":
-                newOrk = director.createScoutOrk();
-                break;
-            default:
-                return;
-        }
-
-       
-        
         DefaultMutableTreeNode tribeNode = findTribeNode(tribe);
         if (tribeNode != null) {
             tribeNode.add(new DefaultMutableTreeNode(newOrk));
@@ -147,24 +136,23 @@ public class GUI {
     }   
     private void displayOrkInfo(Ork ork) {
         StringBuilder info = new StringBuilder();
-        info.append("Имя: ").append(ork.getName()).append("\n");
-        info.append("Племя: ").append(ork.getAttributes()).append("\n");
-        info.append("Оружие: ").append(ork.getWeapon()).append("\n");
-        info.append("Броня: ").append(ork.getArmor()).append("\n");
-        info.append("Знамя: ").append(ork.getBanner()).append("\n");
-        info.append("Сила: ").append(ork.getStrength()).append("\n");
-        info.append("Ловкость: ").append(ork.getAgility()).append("\n");
-        info.append("Интеллект: ").append(ork.getIntelligence()).append("\n");
-        info.append("Здоровье: ").append(ork.getHealth()).append("\n");
+        info.append("Name: ").append(ork.getName()).append("\n");
+        info.append("Weapon: ").append(ork.getWeapon()).append("\n");
+        info.append("Armor: ").append(ork.getArmor()).append("\n");
+        info.append("Banner: ").append(ork.getBanner()).append("\n");
+        info.append("Strength: ").append(ork.getStrength()).append("\n");
+        info.append("Agility: ").append(ork.getAgility()).append("\n");
+        info.append("Intelligence: ").append(ork.getIntelligence()).append("\n");
+        info.append("Health: ").append(ork.getHealth()).append("\n");
 
         infoArea.setText(info.toString());
     }
 
     public void initializeTree() {
         
-        DefaultMutableTreeNode mordorNode = new DefaultMutableTreeNode("Мордор");
-        DefaultMutableTreeNode dolGuldurNode = new DefaultMutableTreeNode("Дол Гулдур");
-        DefaultMutableTreeNode mistyMountainsNode = new DefaultMutableTreeNode("Мглистые Горы");
+        DefaultMutableTreeNode mordorNode = new DefaultMutableTreeNode("Mordor");
+        DefaultMutableTreeNode dolGuldurNode = new DefaultMutableTreeNode("Dol Guldur");
+        DefaultMutableTreeNode mistyMountainsNode = new DefaultMutableTreeNode("Misty Mountains");
 
         rootNode.add(mordorNode);
         rootNode.add(dolGuldurNode);

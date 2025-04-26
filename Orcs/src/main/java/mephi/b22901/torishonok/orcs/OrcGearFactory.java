@@ -8,8 +8,11 @@ package mephi.b22901.torishonok.orcs;
  *
  * @author vikus
  */
-interface OrcGearFactory {
-    String createWeapon();
-    String createArmor();
-    String createBanner();
+public interface OrcGearFactory {
+    public Weapon createWeapon();
+    public Armor createArmor();
+    public Banner createBanner();
+    default public Bow createBow(){
+        return new Bow();
+    }
 }

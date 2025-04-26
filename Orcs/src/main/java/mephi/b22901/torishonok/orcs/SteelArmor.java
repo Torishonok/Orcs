@@ -8,9 +8,12 @@ package mephi.b22901.torishonok.orcs;
  *
  * @author vikus
  */
-public class MordorWeapon implements Weapon{
+public class SteelArmor implements Armor{
+    private final String name = "Steel Armor";
+    
     @Override
     public String getName(){
-        return "Тяжелый меч";
+        return name;
     }
+    
 }

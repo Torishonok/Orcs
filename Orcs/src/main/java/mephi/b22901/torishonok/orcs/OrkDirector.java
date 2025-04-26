@@ -11,37 +11,31 @@ import com.github.javafaker.Faker;
  * @author vikus
  */
 public class OrkDirector {
-   private OrkBuilderFactory factory;
-   private Faker faker;
-
-    public OrkDirector(OrkBuilderFactory factory) {
-        this.factory = factory;
-        this.faker = new Faker();
+   private OrkBuilder orkBuilder;
+  
+    public void setOrkBuilder(OrkBuilder ob) { orkBuilder = ob; }
+    public Ork getOrk() { return orkBuilder.getOrk();   }
+    
+    public void createBasicOrk(){
+        orkBuilder.createNewOrk();
+        orkBuilder.setName();
+        orkBuilder.setAttributes();
+        orkBuilder.setGear();
     }
-
-    public Ork createBasicOrk() {
-        OrkBuilder builder = factory.createOrkBuilder();
-        return builder
-                .setName(faker.name().fullName())
-                .setAttributes(factory.getTribe())
-                .build();
+    
+    public void createLeaderOrk(){
+        orkBuilder.createNewOrk();
+        orkBuilder.setName();
+        orkBuilder.setAttributes();
+        orkBuilder.setGear();
+        orkBuilder.setBanner();
     }
-
-    public Ork createLeaderOrk() {
-        OrkBuilder builder = factory.createOrkBuilder();
-        return builder
-                .setName(faker.name().fullName())
-                .setAttributes(factory.getTribe()) 
-                .setWeapon("Banner") 
-                .build();
-    }
-
-    public Ork createScoutOrk() {
-        OrkBuilder builder = factory.createOrkBuilder();
-        return builder
-                .setName(faker.name().fullName())
-                .setAttributes(factory.getTribe()) 
-                .setWeapon("Bow") 
-                .build();
+    
+    public void createScoutOrk(){
+        orkBuilder.createNewOrk();
+        orkBuilder.setName();
+        orkBuilder.setAttributes();
+        orkBuilder.setGear();
+        orkBuilder.setBow();
     }
 }

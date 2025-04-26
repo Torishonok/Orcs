@@ -8,10 +8,11 @@ package mephi.b22901.torishonok.orcs;
  *
  * @author vikus
  */
-public class MistyMountainsArmor implements Armor {
-    @Override
-    public String getType() {
-        return "Броня Мглистых Гор";
-    }
+public class LeatherArmor implements Armor{
+    private final String name = "Leather Armor";
     
+    @Override
+    public String getName(){
+        return name;
+    }
 }

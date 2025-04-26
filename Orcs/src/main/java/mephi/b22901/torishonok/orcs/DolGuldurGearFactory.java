@@ -10,17 +10,17 @@ package mephi.b22901.torishonok.orcs;
  */
 public class DolGuldurGearFactory implements OrcGearFactory {
     @Override
-    public String createWeapon() {
-        return "Spear";
+    public Weapon createWeapon() {
+        return new Spear();
     }
 
     @Override
-    public String createArmor() {
-        return "Chain mail";
+    public Armor createArmor() {
+        return new ChainMail();
     }
 
     @Override
-    public String createBanner() {
-        return "Banner with a spider";
+    public Banner createBanner() {
+        return new DolGuldurBanner();
     }
 }

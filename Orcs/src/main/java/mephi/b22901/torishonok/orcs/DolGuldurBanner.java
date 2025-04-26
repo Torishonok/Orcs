@@ -9,9 +9,12 @@ package mephi.b22901.torishonok.orcs;
  * @author vikus
  */
 public class DolGuldurBanner implements Banner {
+    
+    private final String name = "Banner with Black spider";
+    
     @Override
-    public String getSymbol() {
-        return "Знамя Дол Гулдур";
+    public String getName() {
+        return name;
     }
     
 }
